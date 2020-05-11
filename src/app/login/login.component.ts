@@ -36,8 +36,6 @@ export class LoginComponent implements OnInit {
       form.value.password
     );
 
-    console.log('usuario de login', usuario);
-
     this.usuarioService
       .loginUsuario(usuario, form.value.recuerdame)
       .subscribe(() => this.router.navigate(['/dashboard']));
@@ -58,7 +56,6 @@ export class LoginComponent implements OnInit {
     this.auth2.attachClickHandler(element, {}, (googleUser) => {
       // const profile = googleUser.getBasicProfile();
       const token = googleUser.getAuthResponse().id_token;
-      console.log(token);
       this.usuarioService
         .loginGoogle(token)
         .subscribe(() => this.router.navigate(['/dashboard']));

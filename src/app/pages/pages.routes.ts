@@ -7,6 +7,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 import { LoguinGuardGuard } from '../services/service.index';
+import { ProfileComponent } from './profile/profile.component';
 
 const pagesRoutes: Routes = [
   {
@@ -18,6 +19,7 @@ const pagesRoutes: Routes = [
       { path: 'progress', component: ProgressComponent },
       { path: 'graficas1', component: Graficas1Component },
       { path: 'account-settings', component: AccountSettingsComponent },
+      { path: 'perfil', component: ProfileComponent },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     ],
   },

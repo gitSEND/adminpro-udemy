@@ -7,6 +7,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 import { RouterModule } from '@angular/router';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { RouterModule } from '@angular/router';
     SidebarComponent,
     BreadcrumbsComponent,
   ],
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, PipesModule],
   exports: [
     NopagefoundComponent,
     HeaderComponent,

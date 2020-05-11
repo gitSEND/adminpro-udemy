@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -11,9 +12,24 @@ export class UsuarioService {
   usuario: UsuarioModel;
   token: string;
 
-  constructor(public http: HttpClient) {
-    console.log('servicio de usuario listo');
+  constructor(
+    public http: HttpClient,
+    public subirArchivoService: SubirArchivoService
+  ) {
     this.cargarStorage();
+  }
+
+  actualizarUsuario(usuario: UsuarioModel) {
+    const url = `${URL_SERVICIOS}/usuario/${usuario._id}?token=${this.token}`;
+    return this.http.put(url, usuario).pipe(
+      map((resp: any) => {
+        // this.usuario = resp.usuario;
+        const usu = resp.usuario;
+        this.guardarStorage(usu._id, this.token, usu);
+        Swal.fire('Usuario actualizado', usuario.nombre, 'success');
+        return true;
+      })
+    );
   }
 
   crearUsuario(usuario: UsuarioModel) {
@@ -35,7 +51,6 @@ export class UsuarioService {
     }
 
     const url = `${URL_SERVICIOS}/login`;
-    console.log('usuario--->', usuario);
 
     return this.http.post(url, usuario).pipe(
       map((res: any) => {
@@ -67,6 +82,19 @@ export class UsuarioService {
     window.location.href = '#/login';
   }
 
+  cambiarImagen(archivo: File, id: string) {
+    this.subirArchivoService
+      .subirArchivo(archivo, 'usuarios', id)
+      .then((resp: any) => {
+        this.usuario.img = resp.usuario.img;
+        Swal.fire('Imagen actualizada', this.usuario.nombre, 'success');
+        this.guardarStorage(id, this.token, this.usuario);
+      })
+      .catch((resp) => {
+        console.log(resp);
+      });
+  }
+
   private cargarStorage() {
     if (localStorage.getItem('token')) {
       this.token = localStorage.getItem('token');
@@ -82,10 +110,6 @@ export class UsuarioService {
     token: string,
     usuario: UsuarioModel
   ): void {
-    console.log('id-->', id);
-    console.log('token-->', token);
-    console.log('usuario-->', usuario);
-
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
