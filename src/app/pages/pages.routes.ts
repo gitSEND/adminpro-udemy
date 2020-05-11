@@ -10,6 +10,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 
 import { LoguinGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 const pagesRoutes: Routes = [
   {
@@ -43,10 +44,17 @@ const pagesRoutes: Routes = [
         component: AccountSettingsComponent,
         data: { titulo: 'Ajuestes del tema' },
       },
+      // tslint:disable-next-line:comment-format
+      //MANTENIMIENTOS
       {
         path: 'perfil',
         component: ProfileComponent,
         data: { titulo: 'Perfil del usuario' },
+      },
+      {
+        path: 'usuarios',
+        component: UsuariosComponent,
+        data: { titulo: 'Mantenimiento de usuarios' },
       },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     ],
