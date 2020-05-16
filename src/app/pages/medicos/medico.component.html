@@ -1,81 +1,47 @@
 <div class="row animated fadeIn">
-  <div class="col-md-6">
-    <div class="card card-body">
-      <h3 class="box-title m-b-0">Medico : {{ medico.nombre }}</h3>
-      <div class="row">
-        <div class="col-sm-12 col-xs-12">
-          <form
-            #form="ngForm"
-            ngNativeValidate
-            (ngSubmit)="guardarMedico(form)"
-          >
-            <div class="form-group">
-              <label for="exampleInputEmail1">Nombre del médico</label>
-              <input
-                [(ngModel)]="medico.nombre"
-                name="medico"
-                type="text"
-                class="form-control"
-                required
-                placeholder="Nombre del médicos"
-              />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Hospital</label>
-              <select
-                (change)="cambioHospital($event.target.value)"
-                [(ngModel)]="medico.hospital"
-                name="hospital"
-                class="form-control"
-                required
-              >
-                <option value="">Selecciona hospital</option>
-                <option
-                  *ngFor="let hospital of hospitales"
-                  [value]="hospital._id"
-                  >{{ hospital.nombre }}</option
-                >
-              </select>
-            </div>
-
-            <button
-              type="Guardar"
-              class="btn btn-success waves-effect waves-light m-r-10"
-            >
-              <i class="fa fa-save"></i>
-              Guardar
-            </button>
-            <a
-              routerLink="/medicos"
-              type="submit"
-              class="btn btn-inverse waves-effect waves-light"
-            >
-              Cancel
-            </a>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="card card-body">
-      <h4 class="box-title m-b-0">Hospital</h4>
-      <img
-        [src]="hospital.img | imagen: 'hospital'"
-        alt=""
-        class="rounded img-fluid"
-      />
-    </div>
-  </div>
-  <div class="col-md-3" *ngIf="medico._id">
-    <div class="card card-body">
-      <h4 class="box-title m-b-0">Fotografía</h4>
-      <img
-        (click)="cambiarFoto()"
-        [src]="medico.img | imagen: 'medico'"
-        alt=""
-        class="rounded img-fluid pointer"
-      />
-    </div>
-  </div>
+	<div class="col-md-6">
+		<div class="card card-body">
+			<h3 class="box-title m-b-0">Medico : {{ medico.nombre }}</h3>
+			<div class="row">
+				<div class="col-sm-12 col-xs-12">
+					<form #form="ngForm" ngNativeValidate (ngSubmit)="guardarMedico(form)">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Nombre del médico</label>
+							<input [(ngModel)]="medico.nombre" name="medico" type="text" class="form-control" required
+								placeholder="Nombre del médicos" />
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Hospital</label>
+							<select (change)="cambioHospital($event.target.value)" [(ngModel)]="medico.hospital"
+								name="hospital" class="form-control" required>
+								<option value="">Selecciona hospital</option>
+								<option *ngFor="let hospital of hospitales" [value]="hospital._id">{{ hospital.nombre }}
+								</option>
+							</select>
+						</div>
+						<button type="Guardar" class="btn btn-success waves-effect waves-light m-r-10">
+							<i class="fa fa-save"></i>
+							Guardar
+						</button>
+						<a routerLink="/medicos" type="submit" class="btn btn-inverse waves-effect waves-light">
+							Cancel
+						</a>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card card-body">
+			<h4 class="box-title m-b-0">Hospital</h4>
+			<img [src]="hospital.img | imagen: 'hospital'" alt="" class="rounded img-fluid" />
+		</div>
+	</div>
+	<div class="col-md-3" *ngIf="medico._id">
+		<div class="card card-body">
+			<h4 class="box-title m-b-0">Fotografía</h4>
+			<img (click)="cambiarFoto()" [src]="medico.img | imagen: 'medico'" alt=""
+				class="rounded img-fluid pointer" />
+		</div>
+	</div>
 </div>

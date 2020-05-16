@@ -3,8 +3,7 @@ export class MedicoModel {
     public nombre?: string,
     public img?: string,
     public usuario?: string,
-    public hospital?: string,
-    // tslint:disable-next-line:variable-name
+    public hospital?: any,
     public _id?: string
   ) {}
 }

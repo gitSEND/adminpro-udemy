@@ -3,14 +3,14 @@ import { Component, OnInit } from '@angular/core';
 declare function initPlugins();
 
 @Component({
-  selector: 'app-pages',
-  templateUrl: './pages.component.html',
-  styles: [],
+	selector: 'app-pages',
+	templateUrl: './pages.component.html',
+	styles: [],
 })
 export class PagesComponent implements OnInit {
-  constructor() {}
+	constructor() { }
 
-  ngOnInit(): void {
-    initPlugins();
-  }
+	ngOnInit(): void {
+		initPlugins();
+	}
 }
