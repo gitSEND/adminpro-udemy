@@ -48,8 +48,6 @@ export class ModalUploadComponent implements OnInit {
         this.modalUploadService.id
       )
       .then((resp) => {
-        console.log(resp);
-
         this.modalUploadService.notificacion.emit(resp);
         this.cerrarModal();
       })
