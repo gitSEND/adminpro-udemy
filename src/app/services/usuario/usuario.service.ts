@@ -12,13 +12,31 @@ import { Observable } from 'rxjs';
 export class UsuarioService {
 	usuario: UsuarioModel;
 	token: string;
-	menu: any[] = []
+	menu: any[] = [];
 
 	constructor(
 		public http: HttpClient,
 		public subirArchivoService: SubirArchivoService
 	) {
 		this.cargarStorage();
+	}
+
+	renuevaToken() {
+		let url = URL_SERVICIOS + '/login/renuevatoken';
+		url += '?token=' + this.token;
+
+		return this.http.get(url).pipe(
+			map((resp: any) => {
+				this.token = resp.token;
+				localStorage.setItem('token', this.token);
+				return true;
+			}),
+			catchError(err => {
+				Swal.fire('No se pudo renovar token', 'No fue posible renovar token', 'error');
+				this.logout();
+				throw err;
+			})
+		);
 	}
 
 	actualizarUsuario(usuario: UsuarioModel) {
